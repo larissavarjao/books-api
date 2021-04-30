@@ -1,0 +1,26 @@
+{
+  "name": "books-api",
+  "version": "1.0.0",
+  "description": "API for app that you could read more about some books",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larissavarjao/books-api.git"
+  },
+  "author": "Larissa Varjão <larissasilvavarjao@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/larissavarjao/books-api/issues"
+  },
+  "homepage": "https://github.com/larissavarjao/books-api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
