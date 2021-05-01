@@ -1,7 +1,7 @@
 const express = require("express");
-const { isBookValid } = require("./validators");
+const { isBookValid } = require("../validators/books");
 const { transformToSnakeCase } = require("../utils/cases");
-const { insertBook } = require("./repository");
+const { insertBook } = require("../repositories/books");
 
 const router = express.Router();
 
