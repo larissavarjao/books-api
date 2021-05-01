@@ -1,4 +1,4 @@
-const { snakeCase } = require("change-case");
+const { snakeCase, camelCase } = require("change-case");
 
 const transformToSnakeCase = (obj) => {
   let newObj = {};
@@ -9,6 +9,16 @@ const transformToSnakeCase = (obj) => {
   return newObj;
 };
 
+const transformToCamelCase = (obj) => {
+  let newObj = {};
+  Object.keys(obj).forEach((snakeCaseKey) => {
+    newObj[camelCase(snakeCaseKey).toString()] = obj[snakeCaseKey];
+  });
+
+  return newObj;
+};
+
 module.exports = {
   transformToSnakeCase,
+  transformToCamelCase,
 };

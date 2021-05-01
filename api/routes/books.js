@@ -1,11 +1,10 @@
 const express = require("express");
 const { isBookValid } = require("../validators/books");
-const { transformToSnakeCase } = require("../utils/cases");
 const { insertBook } = require("../repositories/books");
 
 const router = express.Router();
 
-router.post("/books", (req, res) => {
+router.post("/books", async (req, res) => {
   const newBook = req.body;
 
   try {
@@ -15,9 +14,10 @@ router.post("/books", (req, res) => {
         .send({ message: "Please fill all the fields to create a book." });
     }
 
-    const snakeCaseBook = transformToSnakeCase(newBook);
-    insertBook(snakeCaseBook);
-    res.status(201).send(snakeCaseBook);
+    // const snakeCaseBook = transformToSnakeCase(newBook);
+    const newBookAdded = await insertBook(newBook);
+    console.log({ newBookAdded });
+    res.status(201).send(newBookAdded);
   } catch (e) {
     console.error(e);
     return res.status(400).send({ message: "Please retry later." });
