@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bookRoute = require("./routes/books");
+const dotenv = require("dotenv");
 
-require("dotenv").config();
+const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : ".env";
+dotenv.config({ path: envFile });
 
 app.use(cors());
 app.use(express.json());
@@ -17,3 +19,5 @@ if (process.env.NODE_ENV !== "test") {
     console.log(`Listening on port ${port}`);
   });
 }
+
+module.exports = { app };
