@@ -19,9 +19,7 @@ router.post("/books", async (req, res) => {
         .send({ message: "Please fill all the fields to create a book." });
     }
 
-    // const snakeCaseBook = transformToSnakeCase(newBook);
     const newBookAdded = await insertBook(newBook);
-    console.log({ newBookAdded });
     res.status(201).send(newBookAdded);
   } catch (err) {
     console.error(err);
