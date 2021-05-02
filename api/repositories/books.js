@@ -2,11 +2,29 @@ const db = require("../db");
 const { transformToCamelCase } = require("../utils/cases");
 
 const getAllBooks = async () => {
-  return await db.query("SELECT * FROM books").rows;
+  const res = await db.query("SELECT * FROM books");
+  return res.rows;
 };
 
 const getBookById = async (id) => {
-  return await db.query("SELECT * FROM books WHERE id = $1", [id]);
+  const res = await db.query("SELECT * FROM books WHERE id = $1", [id]);
+  return res.rows[0];
+};
+
+const searchByQueryString = async (wordsOfueriesStringSearch) => {
+  const allBooksStored = await getAllBooks();
+
+  const filterByTitle = allBooksStored.filter((bookStored) => {
+    const titleWordsStoredWithoutSpace = bookStored.title.split(" ");
+
+    const isTitleStoredIncludesAtLeastOneWord = titleWordsStoredWithoutSpace.some(
+      (wordOfTitle) => wordsOfueriesStringSearch.includes(wordOfTitle)
+    );
+
+    return isTitleStoredIncludesAtLeastOneWord;
+  });
+
+  return filterByTitle;
 };
 
 const insertBook = async (newBook) => {
@@ -33,4 +51,5 @@ module.exports = {
   getAllBooks,
   getBookById,
   insertBook,
+  searchByQueryString,
 };
