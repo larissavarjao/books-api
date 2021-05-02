@@ -3,12 +3,12 @@ const { transformToCamelCase } = require("../utils/cases");
 
 const getAllBooks = async () => {
   const res = await db.query("SELECT * FROM books");
-  return res.rows;
+  return res.rows.map((obj) => transformToCamelCase(obj));
 };
 
 const getBookById = async (id) => {
   const res = await db.query("SELECT * FROM books WHERE id = $1", [id]);
-  return res.rows[0];
+  return transformToCamelCase(res.rows[0]);
 };
 
 const searchByQueryString = async (wordsOfueriesStringSearch) => {
