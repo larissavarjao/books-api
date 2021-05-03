@@ -57,10 +57,15 @@ Change the .env.example to .env and env.test and put you enviroment variables th
 
 ### Commands to run the application
 
-#### To run locally
+#### To install the depencies
 
 ```shell
 npm install
+```
+
+#### To run locally
+
+```shell
 npm run dev
 ```
 
