@@ -4,12 +4,10 @@ const dotenv = require("dotenv");
 const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : ".env";
 dotenv.config({ path: envFile });
 
+var connectionString = `postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE}`;
+
 const client = new Client({
-  database: process.env.PGDATABASE,
-  host: process.env.PGHOST,
-  user: process.env.PGUSER,
-  password: process.env.PGPASSWORD,
-  port: process.env.PGPORT,
+  connectionString: connectionString,
 });
 
 client.connect();
