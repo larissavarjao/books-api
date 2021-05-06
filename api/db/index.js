@@ -1,17 +1,19 @@
-const { Pool } = require("pg");
+const { Client } = require("pg");
+const dotenv = require("dotenv");
 
-const pool = new Pool({
+const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : ".env";
+dotenv.config({ path: envFile });
+
+const client = new Client({
   database: process.env.PGDATABASE,
   host: process.env.PGHOST,
   user: process.env.PGUSER,
   password: process.env.PGPASSWORD,
   port: process.env.PGPORT,
-  ssl: false,
 });
 
-console.log(process.env);
-console.log(pool);
+client.connect();
 
 module.exports = {
-  query: (text, params) => pool.query(text, params),
+  query: (text, params) => client.query(text, params),
 };
