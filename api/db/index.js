@@ -10,7 +10,11 @@ const client = new Client({
   connectionString: connectionString,
 });
 
-client.connect();
+try {
+  client.connect();
+} catch (err) {
+  console.log(err);
+}
 
 module.exports = {
   query: (text, params) => client.query(text, params),

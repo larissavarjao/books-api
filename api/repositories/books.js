@@ -5,7 +5,6 @@ const getAllBooks = async (page) => {
   const res = await db.query("SELECT * FROM books LIMIT 5 OFFSET($1 - 1) * 5", [
     page,
   ]);
-  console.log(res.rows);
   return res.rows.map((obj) => transformToCamelCase(obj));
 };
 
@@ -15,15 +14,20 @@ const getBookById = async (id) => {
 };
 
 const searchByQueryString = async (wordsOfQueriesStringSearch) => {
-  const allBooksStored = await getAllBooks();
-
-  if (wordsOfQueriesStringSearch === "") return allBooksStored;
+  const allBooksStored = (await db.query("SELECT * FROM books")).rows;
 
   const filterByTitle = allBooksStored.filter((bookStored) => {
     const titleWordsStoredWithoutSpace = bookStored.title.split(" ");
+
     const isTitleStoredIncludesAtLeastOneWord = titleWordsStoredWithoutSpace.some(
-      (wordOfTitle) =>
-        wordsOfQueriesStringSearch.includes(wordOfTitle.toLowerCase())
+      (wordOfTitle) => {
+        const lowerCaseWordsOfQueriesStringSearch = wordsOfQueriesStringSearch.map(
+          (word) => word.toLowerCase()
+        );
+        return lowerCaseWordsOfQueriesStringSearch.includes(
+          wordOfTitle.toLowerCase()
+        );
+      }
     );
 
     return isTitleStoredIncludesAtLeastOneWord;
