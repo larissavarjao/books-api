@@ -1,8 +1,11 @@
 const db = require("../db");
 const { transformToCamelCase } = require("../utils/cases");
 
-const getAllBooks = async () => {
-  const res = await db.query("SELECT * FROM books");
+const getAllBooks = async (page) => {
+  const res = await db.query("SELECT * FROM books LIMIT 5 OFFSET($1 - 1) * 5", [
+    page,
+  ]);
+  console.log(res.rows);
   return res.rows.map((obj) => transformToCamelCase(obj));
 };
 
@@ -11,14 +14,16 @@ const getBookById = async (id) => {
   return transformToCamelCase(res.rows[0]);
 };
 
-const searchByQueryString = async (wordsOfueriesStringSearch) => {
+const searchByQueryString = async (wordsOfQueriesStringSearch) => {
   const allBooksStored = await getAllBooks();
+
+  if (wordsOfQueriesStringSearch === "") return allBooksStored;
 
   const filterByTitle = allBooksStored.filter((bookStored) => {
     const titleWordsStoredWithoutSpace = bookStored.title.split(" ");
-
     const isTitleStoredIncludesAtLeastOneWord = titleWordsStoredWithoutSpace.some(
-      (wordOfTitle) => wordsOfueriesStringSearch.includes(wordOfTitle)
+      (wordOfTitle) =>
+        wordsOfQueriesStringSearch.includes(wordOfTitle.toLowerCase())
     );
 
     return isTitleStoredIncludesAtLeastOneWord;
