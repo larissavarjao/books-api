@@ -5,17 +5,17 @@ This is a plataform in Node that you can saw some books that it's out there in t
 ## Structure
 
 1.  **`/api`**: This directory contains all api structure;
-    1.1. **`/db`**: This directory contains the connection with Postgres and export the query method so we could perform queries on the database;
-    1.2. **`/repositories`**: This directory contains the business logics;
-    1.3. **`/routes`**: This directory contains the routes of the api;
-    1.4. **`/utils`**: This directory contains functions that are shared in more than onde file;
-    1.5. **`/validators`**: This directory contains functions that validates conditions to create or update entities;
+    - **`/db`**: This directory contains the connection with Postgres and export the query method so we could perform queries on the database;
+    - **`/repositories`**: This directory contains the business logics;
+    - **`/routes`**: This directory contains the routes of the api;
+    - **`/utils`**: This directory contains functions that are shared in more than onde file;
+    - **`/validators`**: This directory contains functions that validates conditions to create or update entities;
 2.  **`/node_modules`**: This directory contains all the modules installed necessary to the api run;
 3.  **`/spec`**: This directory contains all the modules installed necessary to the api run;
-    3.1. **`/__tests__`**: This directory contains the tests that cover the code;
-    3.2. **`/generators`**: This directory contains the generators to our tests cases;
-    3.3. **`/requests`**: This directory contains the requests that will be make to test our api;
-    3.4. **`/setup`**: This directory contains setup the database to run our tests;
+    - **`/__tests__`**: This directory contains the tests that cover the code;
+    - **`/generators`**: This directory contains the generators to our tests cases;
+    - **`/requests`**: This directory contains the requests that will be make to test our api;
+    - **`/setup`**: This directory contains setup the database to run our tests;
 
 ## To run locally the project
 
