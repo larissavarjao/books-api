@@ -42,12 +42,15 @@ Create books table.
 CREATE TABLE books (
     id uuid PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
     title varchar(255) NOT NULL,
-    description varchar(255) NOT NULL,
-    subtitle varchar(255) NOT NULL,
     author varchar(255) NOT NULL,
-    audio_url varchar(255),
-    read_url varchar(255),
-    image_url varchar(255)
+    amount_of_pages INT,
+    current_reading BOOLEAN,
+    amazon_link varchar(255),
+    avatar_link varchar(255),
+    sumary varchar(255) NOT NULL,
+    published_at DATETIME NOT NULL,
+    amount_of_reviews INT,
+    amount_of_ratings INT
 );
 ```
 
