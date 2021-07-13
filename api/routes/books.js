@@ -4,7 +4,7 @@ const {
   insertBook,
   getBookById,
   getAllBooks,
-  searchByQueryString,
+  deleteBook,
 } = require("../repositories/books");
 
 const router = express.Router();
@@ -30,7 +30,6 @@ router.post("/books", async (req, res) => {
 router.get("/books", async (req, res) => {
   const id = req.query.id;
   const page = req.query.page;
-  const querySearch = req.query.search;
 
   try {
     if (id) {
@@ -39,13 +38,40 @@ router.get("/books", async (req, res) => {
       return res.status(200).send(bookById);
     }
 
-    if (querySearch) {
-      const searched = await searchByQueryString(querySearch);
-      return res.status(200).send(searched);
-    }
 
     const allBooks = await getAllBooks(page);
     return res.send(allBooks);
+  } catch (err) {
+    console.error(err);
+    return res.status(400).send({ message: "Please retry later." });
+  }
+});
+
+router.delete("/books", async (req, res) => {
+  const id = req.query.id;
+
+  try {
+    if (id) {
+      console.log({id});
+      const bookDeleted = await deleteBook(id);
+      
+      return res.status(200).send(bookDeleted);
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(400).send({ message: "Please retry later." });
+  }
+});
+
+router.put("/books", async (req, res) => {
+  const id = req.query.id;
+
+  try {
+    if (id) {
+      const bookById = await deleteBook(id);
+    }
+
+    return res.status(200).send({ sucess: true });
   } catch (err) {
     console.error(err);
     return res.status(400).send({ message: "Please retry later." });

@@ -54,11 +54,43 @@ const insertBook = async (newBook) => {
     newBook.amountOfReviews || null,
     newBook.amountOfRatings || null,
   ];
-  console.log({ values })
 
   const res = await db.query(query, values);
 
-  console.log({ res: transformToCamelCase(res.rows[0]) })
+  return transformToCamelCase(res.rows[0]);
+};
+
+const deleteBook = async (id) => {
+  const query =
+    "DELETE FROM books WHERE ID = $1 RETURNING *;"
+  const values = [id];
+
+  const res = await db.query(query, values);
+
+  return transformToCamelCase(res.rows[0]);
+};
+
+const updateBook = async (newBook) => {
+  const query =
+    "INSERT INTO books(title, author, sumary, amount_of_pages, current_reading, amazon_link," +
+    " avatar_link, published_at, amount_of_reviews, amount_of_ratings)" +
+    "VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)" +
+    "RETURNING *";
+  const values = [
+    newBook.title,
+    newBook.author,
+    newBook.sumary,
+    newBook.amountOfPages || 0,
+    newBook.currentReading || false,
+    newBook.amazonLink || null,
+    newBook.avatarLink || null,
+    newBook.publishedAt || new Date(),
+    newBook.amountOfReviews || null,
+    newBook.amountOfRatings || null,
+  ];
+
+  const res = await db.query(query, values);
+
   return transformToCamelCase(res.rows[0]);
 };
 
@@ -66,5 +98,6 @@ module.exports = {
   getAllBooks,
   getBookById,
   insertBook,
-  searchByQueryString,
+  deleteBook,
+  updateBook
 };
