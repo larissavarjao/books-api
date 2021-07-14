@@ -5,6 +5,7 @@ const {
   getBookById,
   getAllBooks,
   deleteBook,
+  updateBook
 } = require("../repositories/books");
 
 const router = express.Router();
@@ -32,7 +33,9 @@ router.get("/books", async (req, res) => {
   const page = req.query.page;
 
   try {
+    console.log({id})
     if (id) {
+      console.log({id})
       const bookById = await getBookById(id);
 
       return res.status(200).send(bookById);
@@ -64,14 +67,17 @@ router.delete("/books", async (req, res) => {
 });
 
 router.put("/books", async (req, res) => {
-  const id = req.query.id;
+  const book = req.body;
 
   try {
-    if (id) {
-      const bookById = await deleteBook(id);
-    }
+    const bookById = await getBookById(book.id);
+    if (bookById) {
+      const updatedBook = await updateBook(book);
 
-    return res.status(200).send({ sucess: true });
+      return res.status(200).send(updatedBook);
+    } else { 
+      return res.status(404).send({ message: "Not Found." });
+    }
   } catch (err) {
     console.error(err);
     return res.status(400).send({ message: "Please retry later." });
