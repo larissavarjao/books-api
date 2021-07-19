@@ -30,7 +30,6 @@ router.post("/authors", async (req, res) => {
 
 router.get("/authors", async (req, res) => {
   const id = req.query.id;
-  const page = req.query.page;
 
   try {
     console.log({id})
@@ -41,8 +40,7 @@ router.get("/authors", async (req, res) => {
       return res.status(200).send(bookById);
     }
 
-
-    const allBooks = await getAllAuthors(page);
+    const allBooks = await getAllAuthors();
     return res.send(allBooks);
   } catch (err) {
     console.error(err);

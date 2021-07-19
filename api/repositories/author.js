@@ -1,10 +1,8 @@
 const db = require("../db");
 const { transformToCamelCase } = require("../utils/cases");
 
-const getAllAuthors = async (page) => {
-  const res = await db.query("SELECT * FROM authors", [
-    page,
-  ]);
+const getAllAuthors = async () => {
+  const res = await db.query("SELECT * FROM authors");
   return res.rows.map((obj) => transformToCamelCase(obj));
 };
 
