@@ -2,7 +2,7 @@ const db = require("../db");
 const { transformToCamelCase } = require("../utils/cases");
 
 const getAllBooks = async (page) => {
-  const res = await db.query("SELECT * FROM books LIMIT 5 OFFSET($1 - 1) * 5", [
+  const res = await db.query("SELECT * FROM books", [
     page,
   ]);
   return res.rows.map((obj) => transformToCamelCase(obj));

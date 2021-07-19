@@ -52,6 +52,14 @@ CREATE TABLE books (
     amount_of_reviews INT,
     amount_of_ratings INT
 );
+
+CREATE TABLE authors (
+    id uuid PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
+    first_name varchar(255) NOT NULL,
+    last_name varchar(255) NOT NULL,
+    fortune INT,
+    pseudo varchar(255)
+);
 ```
 
 ### Creating enviroment variables

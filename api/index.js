@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bookRoute = require("./routes/books");
+const authorRoute = require("./routes/author");
 const dotenv = require("dotenv");
 
 const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : ".env";
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bookRoute);
+app.use(authorRoute);
 
 const port = process.env.PORT || 4444;
 

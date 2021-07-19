@@ -6,4 +6,12 @@ const isBookValid = (book) => {
   return true;
 };
 
-module.exports = { isBookValid };
+const isAuthorValid = (book) => {
+  if (!book.firstName || !book.lastName) {
+    return false;
+  }
+
+  return true;
+};
+
+module.exports = { isBookValid, isAuthorValid };
