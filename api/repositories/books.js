@@ -1,10 +1,8 @@
 const db = require("../db");
 const { transformToCamelCase } = require("../utils/cases");
 
-const getAllBooks = async (page) => {
-  const res = await db.query("SELECT * FROM books", [
-    page,
-  ]);
+const getAllBooks = async () => {
+  const res = await db.query("SELECT * FROM books");
   return res.rows.map((obj) => transformToCamelCase(obj));
 };
 
