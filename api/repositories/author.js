@@ -41,10 +41,9 @@ const deleteAuthor = async (id) => {
 };
 
 const updateAuthor = async (author) => {
-  // first_name, last_name, pseudo, fortune
   const query =
     "UPDATE authors SET first_name = $1, last_name = $2, pseudo = $3, fortune = $4, biography = $5, books_published = $6" +
-    "WHERE id = $5 RETURNING *";
+    "WHERE id = $7 RETURNING *";
   const values = [
     author.firstName,
     author.lastName,
