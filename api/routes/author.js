@@ -1,5 +1,5 @@
 const express = require("express");
-const { isAuthorValid } = require("../validators/authors");
+const { isAuthorValid } = require("../validators/books");
 const {
   insertAuthor,
   getAuthorById,
