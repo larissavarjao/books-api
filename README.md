@@ -58,7 +58,9 @@ CREATE TABLE authors (
     first_name varchar(255) NOT NULL,
     last_name varchar(255) NOT NULL,
     fortune INT,
-    pseudo varchar(255)
+    pseudo varchar(255),
+    biography varchar(255),
+    books_published INT
 );
 ```
 

@@ -1,5 +1,5 @@
 const express = require("express");
-const { isAuthorValid } = require("../validators/books");
+const { isAuthorValid } = require("../validators/authors");
 const {
   insertAuthor,
   getAuthorById,
@@ -17,7 +17,7 @@ router.post("/authors", async (req, res) => {
     if (!isAuthorValid(newAuthor)) {
       return res
         .status(400)
-        .send({ message: "Please fill all the fields to create a book." });
+        .send({ message: "Please fill all the fields to create a author." });
     }
 
     const newAuthorAdded = await insertAuthor(newAuthor);
@@ -35,13 +35,13 @@ router.get("/authors", async (req, res) => {
     console.log({id})
     if (id) {
       console.log({id})
-      const bookById = await getAuthorById(id);
+      const authorById = await getAuthorById(id);
 
-      return res.status(200).send(bookById);
+      return res.status(200).send(authorById);
     }
 
-    const allBooks = await getAllAuthors();
-    return res.send(allBooks);
+    const allauthors = await getAllAuthors();
+    return res.send(allauthors);
   } catch (err) {
     console.error(err);
     return res.status(400).send({ message: "Please retry later." });
@@ -54,9 +54,9 @@ router.delete("/authors", async (req, res) => {
   try {
     if (id) {
       console.log({id});
-      const bookDeleted = await deleteAuthor(id);
+      const authorDeleted = await deleteAuthor(id);
       
-      return res.status(200).send(bookDeleted);
+      return res.status(200).send(authorDeleted);
     }
   } catch (err) {
     console.error(err);
@@ -65,14 +65,14 @@ router.delete("/authors", async (req, res) => {
 });
 
 router.put("/authors", async (req, res) => {
-  const book = req.body;
+  const author = req.body;
 
   try {
-    const bookById = await getAuthorById(book.id);
-    if (bookById) {
-      const updatedBook = await updateAuthor(book);
+    const authorById = await getAuthorById(author.id);
+    if (authorById) {
+      const updatedauthor = await updateAuthor(author);
 
-      return res.status(200).send(updatedBook);
+      return res.status(200).send(updatedauthor);
     } else { 
       return res.status(404).send({ message: "Not Found." });
     }
