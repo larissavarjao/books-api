@@ -1,4 +1,3 @@
-
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { getByEmail } = require("../repositories/users");
@@ -24,11 +23,12 @@ const auth = async (req, res, next) => {
   }
 };
 
-const bcryptPassword = async (password) =>
-  await bcrypt.hash(password, await bcrypt.genSalt());
+const hashPassword = async function(password) {
+  return await bcrypt.hash(password, await bcrypt.genSalt());
+};
 
 
 module.exports = {
-  bcryptPassword,
+  hashPassword,
   auth
 };
