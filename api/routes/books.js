@@ -7,10 +7,11 @@ const {
   deleteBook,
   updateBook
 } = require("../repositories/books");
+const { auth } = require("../utils/auth");
 
 const router = express.Router();
 
-router.post("/books", async (req, res) => {
+router.post("/books", auth, async (req, res) => {
   const newBook = req.body;
 
   try {
@@ -28,7 +29,7 @@ router.post("/books", async (req, res) => {
   }
 });
 
-router.get("/books", async (req, res) => {
+router.get("/books", auth, async (req, res) => {
   const id = req.query.id;
 
   try {
@@ -48,7 +49,7 @@ router.get("/books", async (req, res) => {
   }
 });
 
-router.delete("/books", async (req, res) => {
+router.delete("/books", auth, async (req, res) => {
   const id = req.query.id;
 
   try {
@@ -64,7 +65,7 @@ router.delete("/books", async (req, res) => {
   }
 });
 
-router.put("/books", async (req, res) => {
+router.put("/books", auth, async (req, res) => {
   const book = req.body;
 
   try {

@@ -7,10 +7,11 @@ const {
   deleteAuthor,
   updateAuthor
 } = require("../repositories/author");
+const { auth } = require("../utils/auth");
 
 const router = express.Router();
 
-router.post("/authors", async (req, res) => {
+router.post("/authors", auth, async (req, res) => {
   const newAuthor = req.body;
 
   try {
@@ -28,7 +29,7 @@ router.post("/authors", async (req, res) => {
   }
 });
 
-router.get("/authors", async (req, res) => {
+router.get("/authors", auth, async (req, res) => {
   const id = req.query.id;
 
   try {
@@ -48,7 +49,7 @@ router.get("/authors", async (req, res) => {
   }
 });
 
-router.delete("/authors", async (req, res) => {
+router.delete("/authors", auth, async (req, res) => {
   const id = req.query.id;
 
   try {
@@ -64,7 +65,7 @@ router.delete("/authors", async (req, res) => {
   }
 });
 
-router.put("/authors", async (req, res) => {
+router.put("/authors", auth, async (req, res) => {
   const author = req.body;
 
   try {

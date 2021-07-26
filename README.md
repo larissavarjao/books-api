@@ -62,6 +62,15 @@ CREATE TABLE authors (
     biography varchar(255),
     books_published INT
 );
+
+CREATE TABLE users (
+  id uuid PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
+  first_name varchar(255) NOT NULL,
+  last_name varchar(255),
+  user_type varchar(255) NOT NULL,
+  email varchar(255) NOT NULL,
+  password varchar(255) NOT NULL
+);
 ```
 
 ### Creating enviroment variables
