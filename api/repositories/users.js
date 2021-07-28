@@ -10,7 +10,7 @@ const getUserById = async (id) => {
 
 const getByEmail = async (email) => {
   const res = await db.query("SELECT * FROM users WHERE email = $1", [email]);
-  return res.rows && res.rows.length > 0 && res.rows[0];
+  return res.rows && res.rows.length > 0 && transformToCamelCase(res.rows[0]);
 };
 
 const insertUser = async (newUser) => {
